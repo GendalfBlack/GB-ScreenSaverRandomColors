@@ -20,14 +20,11 @@ int main()
 {
 	srand(time(0));
 	SetConsoleOutputCP(437);
-	auto tp1 = chrono::system_clock::now();	auto tp2 = chrono::system_clock::now();
-	//wchar_t* screen = new wchar_t[120 * 30];
 	CHAR_INFO consoleBuffer[120 * 30];
 	HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL); //handler for console
 	SetConsoleActiveScreenBuffer(hConsole);	DWORD dwBytesWritten = 0;
 	for (int i = 0; i < 3600; i++)
 	{
-		//screen[i] = 14400 +i;
 		consoleBuffer[i].Attributes = rand()%17*17;
 		int rnd = rand() % 5;
 		switch (rnd)
@@ -44,16 +41,9 @@ int main()
 	consoleBuffer[3599].Char.AsciiChar = '\0';
 	SMALL_RECT srctWriteRect = { 0, 0, 119, 29 };;
 	while (true) {
-		tp2 = chrono::system_clock::now();
-		chrono::duration<float> elapsetTime = tp2 - tp1;
-		tp1 = tp2;
-		float deltaTime = elapsetTime.count();
-		//swprintf_s(screen, 12, L"FPS=%3.2f", 1.0f / deltaTime);
-		//WriteConsoleOutputCharacter(hConsole, screen, 3600, { 0, 0 }, &dwBytesWritten);
 		for (int i = 0; i < 3600; i++)
 		{
-			//screen[i] = 14400 +i;
-			consoleBuffer[i].Attributes = rand() % 256;
+			consoleBuffer[i].Attributes = rand() % 17*17;
 			consoleBuffer[i+1].Attributes = consoleBuffer[i].Attributes;
 			int rnd = rand() % 5;
 			switch (rnd)
